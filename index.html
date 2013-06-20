@@ -58,6 +58,78 @@
       });
     });
   </script>
+
+<script>
+
+
+
+    $(window).resize(function(){
+
+        w = $(this).width();
+
+        $("div#wrap").css('width',(w < 920) ? w*0.95 : 570);
+
+        $("body").css('overflow-x','hidden');
+
+    });
+
+
+/****************************************
+ * Floating menu jQuery feature
+ ****************************************/
+$(function() {
+    
+  // grab the initial top offset of the navigation 
+  var floating_navigation_offset_top = $('#navi').offset().top;
+  
+  // get the width of the document
+  var width = $(window).width();
+  var offset_left = '-480px';
+  
+  if(width < 960){
+    offset_left = '-' + width/2 + 'px';
+  } else {
+    offset_left = '-480px';
+  }
+
+  // update the navigation if the window is resized
+  $(window).resize(function() {
+    width = $(window).width();
+    if(width < 960){
+      offset_left = '-' + width/2 + 'px';
+    } else {
+      offset_left = '-480px';
+    }
+    floating_navigation();
+  });
+      
+  // our function that decides weather the navigation bar should have "fixed" css position or not.
+  var floating_navigation = function(){
+    var scroll_top = $(window).scrollTop(); // our current vertical position from the top
+    
+    // if we've scrolled more than the navigation, change its position to fixed to float to top, otherwise change it back to relative
+    if (scroll_top > (floating_navigation_offset_top - 10)) { 
+      $('#navi').css({ 'position': 'fixed', 'top':10});
+    } else {
+      $('#navi').css({ 'position': 'relative'}); 
+    
+    }   
+  };
+  
+  // run our function on load
+  floating_navigation();
+  
+  // and run it again every time you scroll
+  $(window).scroll(function() {
+     floating_navigation();
+  });
+
+});
+
+
+</script>
+
+
   <style type="text/css">
     .fancybox-custom .fancybox-skin {
       box-shadow: 0 0 50px #222;
@@ -85,14 +157,13 @@
 <body>
   <div class="container">
     <div class="three columns sidebar">
-      <nav>
+      <nav id="navi">
         <h3 id="logo">EISA</h3>
         <ul>
           <li><a href="#about">About EISA</a></li>
           <li><a href="#theses">Published Works</a></li>
           <li><a href="#git">GitHub</a></li>
         </ul>
-       <!-- <div id="corbonads-container"><div class="corbonad"><div id="azcarbon"></div><script type="text/javascript">var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = "http://engine.carbonads.com/z/13109/azcarbon_2_1_0_VERT"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script></div></div> -->
         </nav>
         &nbsp
         </div>
@@ -149,4 +220,5 @@
             </p>
           </div>
   </div>
+
 </body>
