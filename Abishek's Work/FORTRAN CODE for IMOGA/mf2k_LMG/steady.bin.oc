@@ -1,7 +1,0 @@
-head print format 0
-head save unit 17
-drawdown save unit 19
-compact budget files
-
-period 1 step 1
-   save head
